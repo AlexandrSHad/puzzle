@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
-        <ItemsControl ItemsSource="{Binding}" MouseMove="ItemControlBoard_MouseMove">
+        <ItemsControl ItemsSource="{Binding}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid ShowGridLines="True" >
@@ -47,6 +47,9 @@
                 <Style TargetType="{x:Type FrameworkElement}">
                     <Setter Property="Grid.Row" Value="{Binding CurrentRow}" />
                     <Setter Property="Grid.Column" Value="{Binding CurrentColumn}" />
+                    <Setter Property="AllowDrop" Value="True" />
+                    <EventSetter Event="PreviewMouseMove" Handler="ItemControlBoard_PreviewMouseMove" />
+                    <EventSetter Event="Drop" Handler="ItemControlBoard_Drop" />
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>

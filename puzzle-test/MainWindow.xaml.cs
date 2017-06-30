@@ -51,12 +51,13 @@ namespace puzzle_test
             //itemsControl.ItemsSource = Tags;
         }
 
-        private void ItemControlBoard_MouseMove(object sender, MouseEventArgs e)
+        private void ItemControlBoard_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                MessageBox.Show("Drug: "+e.Source.ToString());
-                //Image img = (Image)e.Source;
+                //MessageBox.Show("Drug: "+e.Source.ToString());
+                //MessageBox.Show(itemControl.Sel);
+                Image img = (Image)e.OriginalSource;
 
                 //if (img.Source is BitmapImage)
                 //{
@@ -72,9 +73,27 @@ namespace puzzle_test
                 //BitmapFrame bmp = (BitmapFrame)img.Source;
                 //string uriString = bmp.Decoder.ToString();
 
-                //DataObject drugData = new DataObject(uriString);
+                DataObject drugData = new DataObject(img.DataContext);
 
-                //DragDrop.DoDragDrop(img, drugData, DragDropEffects.Move);
+                DragDrop.DoDragDrop(img, drugData, DragDropEffects.Move);
+            }
+        }
+
+        private void ItemControlBoard_Drop(object sender, DragEventArgs e)
+        {
+            Image img = (Image)e.OriginalSource;
+
+            Tag existingTag = img.DataContext as Tag;
+
+            if (e.Data.GetDataPresent(typeof(Tag)))
+            {
+                int tempPosition = existingTag.CurrentPosition;
+
+                Tag droppedTag = e.Data.GetData(typeof(Tag)) as Tag;
+
+                existingTag.CurrentPosition = droppedTag.CurrentPosition;
+
+                droppedTag.CurrentPosition = tempPosition;
             }
         }
 
@@ -84,6 +103,8 @@ namespace puzzle_test
             Tags[8].CurrentPosition = 0;
             //NotifyPropertyChanged("Tags");
         }
+
+
 
         //public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
