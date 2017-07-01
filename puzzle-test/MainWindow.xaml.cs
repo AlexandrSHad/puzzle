@@ -24,6 +24,8 @@ namespace puzzle_test
     {
         public ObservableCollection<Tag> Tags { get; set; }
 
+        private List<object> hitResultsList = new List<object>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,14 +40,14 @@ namespace puzzle_test
                 new Tag() {ImagePath = "./img/6.png", RequiredPosition = 5, CurrentPosition = 5},
                 new Tag() {ImagePath = "./img/7.png", RequiredPosition = 6, CurrentPosition = 6},
                 new Tag() {ImagePath = "./img/8.png", RequiredPosition = 7, CurrentPosition = 7},
-                new Tag() {ImagePath = "./img/9.png", RequiredPosition = 8, CurrentPosition = 8}
+                //new Tag() {ImagePath = "./img/9.png", RequiredPosition = 8, CurrentPosition = 8}
             };
 
             //Tags.Move(0, 8);
 
             DataContext = Tags;
 
-            //Tags[0].currentPosition = 8;
+            //Tags[0].CurrentPosition = 8;
             //Tags[8].currentPosition = 0;
 
             //itemsControl.ItemsSource = Tags;
@@ -104,7 +106,92 @@ namespace puzzle_test
             //NotifyPropertyChanged("Tags");
         }
 
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
 
+
+            return; // RETURN
+
+
+            
+            // Retrieve the coordinate of the mouse position.
+            Point pt = e.GetPosition((UIElement)sender);
+
+            // Clear the contents of the list used for hit test results.
+            hitResultsList.Clear();
+
+            // Set up a callback to receive the hit test result enumeration.
+            HitTestResult hit = VisualTreeHelper.HitTest((UIElement)sender, pt);
+
+            if (hit == null)
+            {
+                MessageBox.Show("null");
+            }
+            else
+            {
+                var img = hit.VisualHit as Image;
+
+                if (img == null)
+                {
+                    MessageBox.Show("not image");
+                }
+                else
+                {
+                    MessageBox.Show(hit.VisualHit.ToString());
+                }
+            }
+
+            // Perform actions on the hit test results list.
+            //if (hitResultsList.Count > 0)
+            //{
+            //    Console.WriteLine("Number of Visuals Hit: " + hitResultsList.Count);
+            //    foreach (object res in hitResultsList)
+            //    {
+            //        MessageBox.Show(res.ToString());
+            //    }
+            //}
+        }
+
+        // Return the result of the hit test to the callback.
+        public HitTestResultBehavior MyHitTestResult(HitTestResult result)
+        {
+            // Add the hit test result to the list that will be processed after the enumeration.
+            hitResultsList.Add(result.VisualHit);
+
+            // Set the behavior to return visuals at all z-order levels.
+            return HitTestResultBehavior.Continue;
+        }
+
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            //Point p = e.GetPosition((UIElement)sender);
+
+            //HitTestResult result = VisualTreeHelper.HitTest((UIElement)sender, p);
+
+            //gridBoards
+
+            Tag tag = e.Data.GetData(typeof(Tag)) as Tag;
+            tag.CurrentPosition = 8;
+        }
+
+        private void Window_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effects = DragDropEffects.None;
+
+            Point p = e.GetPosition((UIElement)sender);
+
+            HitTestResult hit = VisualTreeHelper.HitTest((UIElement)sender, p);
+
+            if (hit != null)
+            {
+                if (!(hit.VisualHit is Image))
+                {
+                    e.Effects = DragDropEffects.Move;
+                }
+            }
+
+            e.Handled = true;
+        }
 
         //public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
