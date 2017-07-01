@@ -21,7 +21,7 @@
         <ItemsControl Name="itemsControl" ItemsSource="{Binding}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Grid Name="gridBoard" ShowGridLines="True">
+                    <Grid x:Name="gridBoard" ShowGridLines="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />

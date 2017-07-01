@@ -167,11 +167,69 @@ namespace puzzle_test
             //Point p = e.GetPosition((UIElement)sender);
 
             //HitTestResult result = VisualTreeHelper.HitTest((UIElement)sender, p);
+            //DependencyObject control;
+            //for (int i = 0; i <= VisualTreeHelper.GetChildrenCount(itemsControl) - 1; i++)
+            //{
+            //    control = VisualTreeHelper.GetChild(itemsControl, i);
+            //}
 
-            //gridBoards
+            Grid grid = FindVisualChild<Grid>(itemsControl);
+
+            Point p = e.GetPosition(grid);
+
+            int col, row;
+
+            getPosition(grid, p, out col, out row);
 
             Tag tag = e.Data.GetData(typeof(Tag)) as Tag;
-            tag.CurrentPosition = 8;
+            tag.CurrentPosition = row * 3 + col;
+        }
+
+        public void getPosition(Grid grid, Point point, out int col, out int row)
+        {
+            //DControl control = parent as DControl;
+            //var point = Mouse.GetPosition(element);
+            row = 0;
+            col = 0;
+            double accumulatedHeight = 0.0;
+            double accumulatedWidth = 0.0;
+
+            // calc row mouse was over
+            foreach (var rowDefinition in grid.RowDefinitions)
+            {
+                accumulatedHeight += rowDefinition.ActualHeight;
+                if (accumulatedHeight >= point.Y)
+                    break;
+                row++;
+            }
+
+            // calc col mouse was over
+            foreach (var columnDefinition in grid.ColumnDefinitions)
+            {
+                accumulatedWidth += columnDefinition.ActualWidth;
+                if (accumulatedWidth >= point.X)
+                    break;
+                col++;
+            }
+        }
+
+        public static T FindVisualChild<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        return (T)child;
+                    }
+
+                    T childItem = FindVisualChild<T>(child);
+                    if (childItem != null) return childItem;
+                }
+            }
+            return null;
         }
 
         private void Window_DragOver(object sender, DragEventArgs e)
