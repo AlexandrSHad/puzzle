@@ -23,6 +23,11 @@ namespace puzzle_test
             CreateTags();
         }
 
+        public int GetPosition(int col, int row)
+        {
+            return BOARD_SIZE * row + col;
+        }
+
         public void Move(int from, int to)
         {
             Tag tempTag = _tags[to];

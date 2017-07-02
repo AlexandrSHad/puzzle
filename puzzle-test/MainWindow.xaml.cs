@@ -30,7 +30,7 @@ namespace puzzle_test
 
         private void buttonMove_Click(object sender, RoutedEventArgs e)
         {
-            _mainViewModel.MoveByBoard(0, 5);
+            _mainViewModel.MoveByBoard(0, 0, 1, 1);
 
             //img5.Source = new BitmapImage(new Uri("/img/6.png", UriKind.Relative));
             //img6.Source = new BitmapImage(new Uri("/img/5.png", UriKind.Relative));
@@ -42,35 +42,74 @@ namespace puzzle_test
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 //MessageBox.Show("Drug");
-                Image img = (Image)e.Source;
-                
-                if (img.Source is BitmapImage)
-                {
-                    MessageBox.Show("BitmapImage");
-                    return;
-                }
 
-                //if (img.Source is BitmapFrame)
+                var img = e.Source as Image;
+
+                //int col = Grid.GetColumn(img);
+                //int row = Grid.GetRow(img);
+
+                //DataObject dataObject = new DataObject(tag); // col + row
+
+                DragDrop.DoDragDrop((Image)img, new DataObject(img), DragDropEffects.Move);
+
+                //if (img == null)
                 //{
-                //    MessageBox.Show("BitmapFrame");
+                //    return;
                 //}
 
-                BitmapFrame bmp = (BitmapFrame)img.Source;
-                string uriString = bmp.Decoder.ToString();
+                //var tag = img.DataContext as Tag;
 
-                DataObject drugData = new DataObject(uriString);
+                //if (tag != null)
+                //{
+                //    DataObject dataObject = new DataObject(tag);
 
-                DragDrop.DoDragDrop(img, drugData, DragDropEffects.Move);
+                //    DragDrop.DoDragDrop((Image)img, dataObject, DragDropEffects.Move);
+                //}
+
+
+                //Image img = (Image)e.Source;
+
+                //if (img.Source is BitmapImage)
+                //{
+                //    MessageBox.Show("BitmapImage");
+                //    return;
+                //}
+
+                ////if (img.Source is BitmapFrame)
+                ////{
+                ////    MessageBox.Show("BitmapFrame");
+                ////}
+
+                //BitmapFrame bmp = (BitmapFrame)img.Source;
+                //string uriString = bmp.Decoder.ToString();
+
+                //DataObject drugData = new DataObject(uriString);
+
+                //DragDrop.DoDragDrop(img, drugData, DragDropEffects.Move);
             }
         }
 
         private void gridBoard_Drop(object sender, DragEventArgs e)
         {
-            Image img = (Image)e.Source;
+            var imgDrag = e.Data.GetData(typeof(Image)) as Image;
+            var imgDrop = e.Source as Image;
 
-            string uriString = (string)e.Data.GetData(typeof(string));
+            if ((imgDrag == null) | (imgDrop == null))
+            {
+                return;
+            }
 
-            img.Source = new BitmapImage(new Uri(uriString));
+            int colFrom = Grid.GetColumn(imgDrag);
+            int rowFrom = Grid.GetRow(imgDrag);
+
+            int colTo = Grid.GetColumn(imgDrop);
+            int rowTo = Grid.GetRow(imgDrop);
+
+            _mainViewModel.MoveByBoard(colFrom, rowFrom, colTo, rowTo);
+
+            //Image img = (Image)e.Source;
+            //string uriString = (string)e.Data.GetData(typeof(string));
+            //img.Source = new BitmapImage(new Uri(uriString));
         }
     }
 
