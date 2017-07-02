@@ -12,7 +12,11 @@ namespace puzzle_test
     class BoardViewModel : IEnumerable<Tag>
     {
         private readonly int BOARD_SIZE = 3;
-        private List<Tag> _tags = new List<Tag>();
+        private ObservableCollection<Tag> _tags = new ObservableCollection<Tag>();
+        public ObservableCollection<Tag> Tags
+        {
+            get { return _tags; }
+        }
 
         public BoardViewModel()
         {
@@ -36,11 +40,11 @@ namespace puzzle_test
             return this.GetEnumerator();
         }
 
-        public Tag this[int index]
-        {
-            get { return _tags[index]; }
-        }
-        
+        //public Tag this[int index]
+        //{
+        //    get { return _tags[index]; }
+        //}
+
         #region Helpers
 
         private void CreateTags()
