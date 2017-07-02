@@ -23,13 +23,11 @@ namespace puzzle_test
             CreateTags();
         }
 
-        public int GetPosition(int col, int row)
+        public void Move(int colFrom, int rowFrom, int colTo, int rowTo)
         {
-            return BOARD_SIZE * row + col;
-        }
+            int from = GetPosition(colFrom, rowFrom);
+            int to = GetPosition(colTo, rowTo);
 
-        public void Move(int from, int to)
-        {
             Tag tempTag = _tags[to];
             _tags[to] = _tags[from];
             _tags[from] = tempTag;
@@ -63,7 +61,16 @@ namespace puzzle_test
             _tags[0].ImagePath = "./img/1.png";
             _tags[0].IsEmpty = false;
 
+            _tags[1].RequiredPosition = 0;
+            _tags[1].ImagePath = "./img/2.png";
+            _tags[1].IsEmpty = false;
+
             //Move(0, 8);
+        }
+
+        private int GetPosition(int col, int row)
+        {
+            return BOARD_SIZE * row + col;
         }
 
         #endregion Helpers

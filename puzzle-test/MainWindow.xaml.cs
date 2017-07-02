@@ -94,7 +94,7 @@ namespace puzzle_test
             var imgDrag = e.Data.GetData(typeof(Image)) as Image;
             var imgDrop = e.Source as Image;
 
-            if ((imgDrag == null) | (imgDrop == null))
+            if ((imgDrag == null) || (imgDrop == null))
             {
                 return;
             }

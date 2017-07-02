@@ -22,10 +22,7 @@ namespace puzzle_test
 
         public void MoveByBoard(int colFrom, int rowFrom, int colTo, int rowTo)
         {
-            int from = _boardViewModel.GetPosition(colFrom, rowFrom);
-            int to = _boardViewModel.GetPosition(colTo, rowTo);
-
-            _boardViewModel.Move(from, to);
+            _boardViewModel.Move(colFrom, rowFrom, colTo, rowTo);
         }
     }
 }
