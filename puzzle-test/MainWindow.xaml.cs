@@ -20,9 +20,12 @@ namespace puzzle_test
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainViewModel _mainViewModel = new MainViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = _mainViewModel;
         }
 
         private void buttonMove_Click(object sender, RoutedEventArgs e)
