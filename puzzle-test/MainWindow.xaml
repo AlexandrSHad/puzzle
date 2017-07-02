@@ -24,15 +24,15 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Image Name="img1" AllowDrop="True" Source="{Binding Path=Item[0].ImagePath}" Stretch="Fill" />
-            <Image Name="img2" AllowDrop="True" Source="{Binding Path=Item[1].ImagePath}" Grid.Column="1" />
-            <Image Name="img3" AllowDrop="True" Source="{Binding Path=Item[2].ImagePath}" Grid.Column="2" />
-            <Image Name="img4" AllowDrop="True" Source="{Binding Path=Item[3].ImagePath}" Grid.Row="1" />
-            <Image Name="img5" AllowDrop="True" Source="{Binding Path=Item[4].ImagePath}" Grid.Row="1" Grid.Column="1" />
-            <Image Name="img6" AllowDrop="True" Source="{Binding Path=Item[5].ImagePath}" Grid.Row="1" Grid.Column="2" />
-            <Image Name="img7" AllowDrop="True" Source="{Binding Path=Item[6].ImagePath}" Grid.Row="2" />
-            <Image Name="img8" AllowDrop="True" Source="{Binding Path=Item[7].ImagePath}" Grid.Row="2" Grid.Column="1" />
-            <Image Name="img9" AllowDrop="True" Source="{Binding Path=Item[8].ImagePath}" Grid.Row="2" Grid.Column="2" />
+            <Image Name="img1" AllowDrop="True" Source="{Binding Item[0].ImagePath}" Stretch="Fill" />
+            <Image Name="img2" AllowDrop="True" Source="{Binding Item[1].ImagePath}" Grid.Column="1" />
+            <Image Name="img3" AllowDrop="True" Source="{Binding Item[2].ImagePath}" Grid.Column="2" />
+            <Image Name="img4" AllowDrop="True" Source="{Binding Item[3].ImagePath}" Grid.Row="1" />
+            <Image Name="img5" AllowDrop="True" Source="{Binding Item[4].ImagePath}" Grid.Row="1" Grid.Column="1" />
+            <Image Name="img6" AllowDrop="True" Source="{Binding Item[5].ImagePath}" Grid.Row="1" Grid.Column="2" />
+            <Image Name="img7" AllowDrop="True" Source="{Binding Item[6].ImagePath}" Grid.Row="2" />
+            <Image Name="img8" AllowDrop="True" Source="{Binding Item[7].ImagePath}" Grid.Row="2" Grid.Column="1" />
+            <Image Name="img9" AllowDrop="True" Source="{Binding Item[8].ImagePath}" Grid.Row="2" Grid.Column="2" />
         </Grid>
 
         <StackPanel Grid.Row="1">

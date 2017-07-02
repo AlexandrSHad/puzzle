@@ -30,8 +30,10 @@ namespace puzzle_test
 
         private void buttonMove_Click(object sender, RoutedEventArgs e)
         {
-            img5.Source = new BitmapImage(new Uri("/img/6.png", UriKind.Relative));
-            img6.Source = new BitmapImage(new Uri("/img/5.png", UriKind.Relative));
+            _mainViewModel.MoveByBoard(0, 5);
+
+            //img5.Source = new BitmapImage(new Uri("/img/6.png", UriKind.Relative));
+            //img6.Source = new BitmapImage(new Uri("/img/5.png", UriKind.Relative));
             //MessageBox.Show(img5.Source.BaseUri);
         }
 

@@ -19,5 +19,10 @@ namespace puzzle_test
         {
 
         }
+
+        public void MoveByBoard(int from, int to)
+        {
+            _boardViewModel.Move(from, to);
+        }
     }
 }
