@@ -19,25 +19,18 @@ namespace puzzle_test
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                Image img = (Image)e.OriginalSource;
+                Tag draggedTag = GetRelationTag(e.OriginalSource);
 
-                if (img == null)
+                if (draggedTag == null)
                 {
                     return;
                 }
 
-                Tag tag = img.DataContext as Tag;
-
-                if (tag == null)
+                if (!draggedTag.IsEmpty)
                 {
-                    return;
-                }
+                    DataObject dragData = new DataObject(draggedTag);
 
-                if (!tag.IsEmpty)
-                {
-                    DataObject drugData = new DataObject(tag);
-
-                    DragDrop.DoDragDrop(img, drugData, DragDropEffects.Move);
+                    DragDrop.DoDragDrop((UIElement)e.OriginalSource, dragData, DragDropEffects.Move);
                 }
             }
         }
@@ -50,16 +43,9 @@ namespace puzzle_test
 
         private void ItemControlBoard_Drop(object sender, DragEventArgs e)
         {
-            Image droppedImage = e.OriginalSource as Image;
+            Tag targetTag = GetRelationTag(e.OriginalSource);
 
-            if (droppedImage == null)
-            {
-                return;
-            }
-
-            Tag droppedTag = droppedImage.DataContext as Tag;
-
-            if (droppedTag == null)
+            if (targetTag == null)
             {
                 return;
             }
@@ -68,7 +54,7 @@ namespace puzzle_test
             {
                 Tag draggedTag = (Tag)e.Data.GetData(typeof(Tag));
 
-                _mainViewModel.MoveByBoard(draggedTag, droppedTag);
+                _mainViewModel.MoveByBoard(draggedTag, targetTag);
             }
         }
 
@@ -76,21 +62,30 @@ namespace puzzle_test
         {
             e.Effects = DragDropEffects.None;
 
-            Image img = e.OriginalSource as Image;
+            Tag targetTag = GetRelationTag(e.OriginalSource);
 
-            if (img == null)
-            {
-                return;
-            }
-
-            Tag tag = img.DataContext as Tag;
-
-            if (tag.IsEmpty)
+            if (targetTag.IsEmpty)
             {
                 e.Effects = DragDropEffects.Move;
             }
 
             e.Handled = true;
         }
+
+        #region Helpers
+
+        private Tag GetRelationTag(object control)
+        {
+            Image img = control as Image;
+
+            if (img == null)
+            {
+                return null;
+            }
+
+            return img.DataContext as Tag;
+        }
+        
+        #endregion Helpers
     }
 }
