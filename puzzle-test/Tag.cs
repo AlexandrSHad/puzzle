@@ -9,20 +9,31 @@ namespace puzzle_test
 {
     public class Tag : INotifyPropertyChanged
     {
-        int _currentPosition;
-        public string ImagePath { get; set; }
-        public int CurrentPosition
+        public Tag(int currentPosition)
         {
-            get { return _currentPosition; }
-            set
-            {
-                _currentPosition = value;
-                NotifyPropertyChanged("currentRow");
-                NotifyPropertyChanged("currentColumn");
-            }
+            ImagePath = "./img/empty.png";
+            IsEmpty = true;
+            _currentPosition = currentPosition;
+            RequiredPosition = -1;
         }
+
+        public string ImagePath { get; set; }
+        public bool IsEmpty { get; set; }
         public int RequiredPosition { get; set; }
 
+        int _currentPosition;
+            public int CurrentPosition
+            {
+                get { return _currentPosition; }
+                set
+                {
+                    _currentPosition = value;
+                    NotifyPropertyChanged("currentRow");
+                    NotifyPropertyChanged("currentColumn");
+                }
+            }
+
+        //TODO: delete this two methods and create Converter for cast _currentPosition to Row and Column
         public int CurrentRow
         {
             get

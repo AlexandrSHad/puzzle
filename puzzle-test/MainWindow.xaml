@@ -5,20 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:puzzle_test"
         mc:Ignorable="d"
-        Title="MainWindow" Height="525" Width="525"
-        
-        MouseDown="Window_MouseDown"
-        
-        AllowDrop="True"
-        Drop="Window_Drop"
-        DragOver="Window_DragOver">
+        Title="MainWindow" Height="555" Width="525">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ItemsControl Name="itemsControl" ItemsSource="{Binding}">
+        <ItemsControl Name="itemsControl" ItemsSource="{Binding BoardViewModel.Tags}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid x:Name="gridBoard" ShowGridLines="True">
@@ -35,15 +29,6 @@
                     </Grid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-            <!--<ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                            <TextBlock Text="{Binding currentRow}" Background="Aqua" />
-                            <TextBlock Text="{Binding currentColumn}" Background="Azure" />
-                            <TextBlock Text="{Binding currentPosition}" Background="Yellow" />
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>-->
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:Tag}">
                     <Image Source="{Binding ImagePath}" />
@@ -53,8 +38,9 @@
                 <Style TargetType="{x:Type FrameworkElement}">
                     <Setter Property="Grid.Row" Value="{Binding CurrentRow}" />
                     <Setter Property="Grid.Column" Value="{Binding CurrentColumn}" />
-                    <!--<Setter Property="AllowDrop" Value="True" />
-                    <EventSetter Event="Drop" Handler="ItemControlBoard_Drop" />-->
+                    <Setter Property="AllowDrop" Value="True" />
+                    <EventSetter Event="Drop" Handler="ItemControlBoard_Drop" />
+                    <EventSetter Event="DragOver" Handler="ItemControlBoard_DragOver" />
                     <EventSetter Event="PreviewMouseMove" Handler="ItemControlBoard_PreviewMouseMove" />
                 </Style>
             </ItemsControl.ItemContainerStyle>
