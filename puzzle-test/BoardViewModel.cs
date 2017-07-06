@@ -56,14 +56,7 @@ namespace puzzle_test
             _tags[1].RequiredPosition = 0;
             _tags[1].ImagePath = "./img/2.png";
             _tags[1].IsEmpty = false;
-
-            //Move(0, 8);
         }
-
-        //private int GetPosition(int col, int row)
-        //{
-        //    return BOARD_SIZE * row + col;
-        //}
 
         #endregion Helpers
     }

@@ -15,6 +15,7 @@ namespace puzzle_test
             DataContext = _mainViewModel;
         }
 
+        // TODO: create class for Drag and Drop command binding as Attached Behavior rather then this three methods
         private void ItemControlBoard_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
