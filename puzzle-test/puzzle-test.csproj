@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Tag.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -103,6 +104,9 @@
     <Resource Include="img\7.png" />
     <Resource Include="img\8.png" />
     <Resource Include="img\9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\empty.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
