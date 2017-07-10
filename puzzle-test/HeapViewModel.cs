@@ -23,6 +23,11 @@ namespace puzzle_test
             CreateTags();
         }
 
+        internal void Remove(Tag source)
+        {
+            _tags.Remove(source);
+        }
+
         //public void Move(Tag source, Tag target)
         //{
         //    int tempPosition = source.CurrentPosition;
@@ -37,7 +42,7 @@ namespace puzzle_test
         {
             for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++)
             {
-                Tag newTag = new Tag(i, i, String.Format("./img/{0}.png", i+1));
+                Tag newTag = new Tag( i, String.Format("./img/{0}.png", i+1));
                 _tags.Add(newTag);
             }
         }

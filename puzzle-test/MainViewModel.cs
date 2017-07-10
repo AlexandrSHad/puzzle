@@ -20,9 +20,17 @@ namespace puzzle_test
                 get { return _heapViewModel; }
             }
 
-        public void MoveByBoard(Tag source, Tag target)
+        public void Move(Tag source, Tag target)
         {
-            _boardViewModel.Move(source, target);
+            if (source.CurrentPosition == -1)
+            {
+                _boardViewModel.MoveFromHeap(source, target);
+                _heapViewModel.Remove(source);
+            }
+            else
+            {
+                _boardViewModel.MoveByBoard(source, target);
+            }
         }
     }
 }

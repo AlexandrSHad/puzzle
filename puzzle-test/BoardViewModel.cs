@@ -23,11 +23,18 @@ namespace puzzle_test
             CreateTags();
         }
 
-        public void Move(Tag source, Tag target)
+        public void MoveByBoard(Tag source, Tag target)
         {
             int tempPosition = source.CurrentPosition;
             source.CurrentPosition = target.CurrentPosition;
             target.CurrentPosition = tempPosition;
+        }
+
+        internal void MoveFromHeap(Tag source, Tag target)
+        {
+            source.CurrentPosition = target.CurrentPosition;
+            _tags.Remove(target);
+            _tags.Add(source);
         }
 
         public IEnumerator<Tag> GetEnumerator()

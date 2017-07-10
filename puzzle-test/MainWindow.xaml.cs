@@ -55,7 +55,7 @@ namespace puzzle_test
             {
                 Tag draggedTag = (Tag)e.Data.GetData(typeof(Tag));
 
-                _mainViewModel.MoveByBoard(draggedTag, targetTag);
+                _mainViewModel.Move(draggedTag, targetTag);
             }
         }
 
