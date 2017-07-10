@@ -24,13 +24,23 @@ namespace puzzle_test
         {
             if (source.CurrentPosition == -1)
             {
-                _boardViewModel.MoveFromHeap(source, target);
-                _heapViewModel.Remove(source);
+                MoveFromHeap(source, target);
             }
             else
             {
-                _boardViewModel.MoveByBoard(source, target);
+                MoveByBoard(source, target);
             }
+        }
+
+        private void MoveFromHeap(Tag source, Tag target)
+        {
+            _boardViewModel.MoveFromHeap(source, target);
+            _heapViewModel.Remove(source);
+        }
+
+        private void MoveByBoard(Tag source, Tag target)
+        {
+            _boardViewModel.MoveByBoard(source, target);
         }
     }
 }
