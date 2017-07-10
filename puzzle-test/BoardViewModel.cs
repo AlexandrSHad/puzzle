@@ -37,6 +37,11 @@ namespace puzzle_test
             _tags.Add(source);
         }
 
+        public bool CheckForWin()
+        {
+            return _tags.All(t => t.CurrentPosition == t.RequiredPosition);
+        }
+
         public IEnumerator<Tag> GetEnumerator()
         {
             return _tags.GetEnumerator();
@@ -55,14 +60,6 @@ namespace puzzle_test
             {
                 _tags.Add(new Tag(i)); // TODO: create tags with Enumerable.Zip() method
             }
-
-            _tags[0].RequiredPosition = 0;
-            _tags[0].ImagePath = "./img/1.png";
-            _tags[0].IsEmpty = false;
-
-            _tags[1].RequiredPosition = 0;
-            _tags[1].ImagePath = "./img/2.png";
-            _tags[1].IsEmpty = false;
         }
 
         #endregion Helpers

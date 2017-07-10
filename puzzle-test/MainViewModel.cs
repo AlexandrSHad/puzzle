@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace puzzle_test
 {
@@ -30,6 +31,8 @@ namespace puzzle_test
             {
                 MoveByBoard(source, target);
             }
+
+            CheckForWin();
         }
 
         private void MoveFromHeap(Tag source, Tag target)
@@ -41,6 +44,14 @@ namespace puzzle_test
         private void MoveByBoard(Tag source, Tag target)
         {
             _boardViewModel.MoveByBoard(source, target);
+        }
+
+        private void CheckForWin()
+        {
+            if (_boardViewModel.CheckForWin())
+            {
+                MessageBox.Show("Congratulation! You are a winner.");
+            }
         }
     }
 }
