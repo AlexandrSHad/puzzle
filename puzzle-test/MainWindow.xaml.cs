@@ -73,6 +73,23 @@ namespace puzzle_test
             e.Handled = true;
         }
 
+        private void ListBoxHeap_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Tag draggedTag = GetRelationTag(e.OriginalSource);
+
+                if (draggedTag == null)
+                {
+                    return;
+                }
+
+                DataObject dragData = new DataObject(draggedTag);
+
+                DragDrop.DoDragDrop((UIElement)e.OriginalSource, dragData, DragDropEffects.Move);
+            }
+        }
+
         #region Helpers
 
         private Tag GetRelationTag(object control)
@@ -86,7 +103,7 @@ namespace puzzle_test
 
             return img.DataContext as Tag;
         }
-        
+
         #endregion Helpers
     }
 }
