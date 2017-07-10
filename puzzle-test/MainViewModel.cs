@@ -14,6 +14,12 @@ namespace puzzle_test
                 get { return _boardViewModel; }
             }
 
+        private readonly HeapViewModel _heapViewModel = new HeapViewModel();
+            public HeapViewModel HeapViewModel
+            {
+                get { return _heapViewModel; }
+            }
+
         public void MoveByBoard(Tag source, Tag target)
         {
             _boardViewModel.Move(source, target);

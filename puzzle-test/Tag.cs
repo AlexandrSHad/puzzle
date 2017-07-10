@@ -17,6 +17,14 @@ namespace puzzle_test
             RequiredPosition = -1;
         }
 
+        public Tag(int currentPosition, int requiredPosition, string imagePath)
+        {
+            ImagePath = imagePath;
+            _currentPosition = currentPosition;
+            RequiredPosition = requiredPosition;
+            IsEmpty = false;
+        }
+
         public string ImagePath { get; set; }
         public bool IsEmpty { get; set; }
         public int RequiredPosition { get; set; }
