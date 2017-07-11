@@ -28,13 +28,6 @@ namespace puzzle_test
             _tags.Remove(source);
         }
 
-        //public void Move(Tag source, Tag target)
-        //{
-        //    int tempPosition = source.CurrentPosition;
-        //    source.CurrentPosition = target.CurrentPosition;
-        //    target.CurrentPosition = tempPosition;
-        //}
-
 
         #region Helpers
 
