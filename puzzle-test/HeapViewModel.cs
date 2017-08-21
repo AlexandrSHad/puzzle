@@ -21,6 +21,22 @@ namespace puzzle_test
         public HeapViewModel()
         {
             CreateTags();
+            Shuffle();
+        }
+
+        internal void Shuffle()
+        {
+            int n = _tags.Count;
+            while (n > 1)
+            {
+                var rng = new Random();
+
+                n--;
+                int k = rng.Next(n + 1);
+                Tag value = _tags[k];
+                _tags[k] = _tags[n];
+                _tags[n] = value;
+            }
         }
 
         internal void Remove(Tag source)
@@ -35,7 +51,7 @@ namespace puzzle_test
         {
             for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; i++)
             {
-                Tag newTag = new Tag( i, String.Format("./img/{0}.png", i+1));
+                Tag newTag = new Tag( i, String.Format("./img/puzzle01/{0:D3}.png", i+1));
                 _tags.Add(newTag);
             }
         }
