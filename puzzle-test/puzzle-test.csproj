@@ -111,5 +111,16 @@
   <ItemGroup>
     <Resource Include="img\empty.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\puzzle01\001.png" />
+    <Resource Include="img\puzzle01\002.png" />
+    <Resource Include="img\puzzle01\003.png" />
+    <Resource Include="img\puzzle01\004.png" />
+    <Resource Include="img\puzzle01\005.png" />
+    <Resource Include="img\puzzle01\006.png" />
+    <Resource Include="img\puzzle01\007.png" />
+    <Resource Include="img\puzzle01\008.png" />
+    <Resource Include="img\puzzle01\009.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
