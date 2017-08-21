@@ -36,26 +36,9 @@ namespace puzzle_test
                 set
                 {
                     _currentPosition = value;
-                    NotifyPropertyChanged("currentRow");
-                    NotifyPropertyChanged("currentColumn");
+                    NotifyPropertyChanged("CurrentPosition");
                 }
             }
-
-        //TODO: delete this two methods and create Converter for cast _currentPosition to Row and Column
-        public int CurrentRow
-        {
-            get
-            {
-                return _currentPosition / 3;
-            }
-        }
-        public int CurrentColumn
-        {
-            get
-            {
-                return _currentPosition % 3;
-            }
-        }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 

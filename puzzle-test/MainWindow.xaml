@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:puzzle_test"
         mc:Ignorable="d"
         Title="MainWindow" Height="575" Width="825">
+    <Window.Resources>
+        <local:CurrentPositionConverter x:Key="currentPositionConverter" />
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -45,8 +49,14 @@
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
                 <Style TargetType="{x:Type FrameworkElement}">
-                    <Setter Property="Grid.Row" Value="{Binding CurrentRow}" />
-                    <Setter Property="Grid.Column" Value="{Binding CurrentColumn}" />
+                    <Setter Property="Grid.Row" 
+                            Value="{Binding CurrentPosition,
+                                    Converter={StaticResource currentPositionConverter},
+                                    ConverterParameter=Row}" />
+                    <Setter Property="Grid.Column"
+                            Value="{Binding CurrentPosition,
+                                    Converter={StaticResource currentPositionConverter},
+                                    ConverterParameter=Column}" />
                     <Setter Property="AllowDrop" Value="True" />
                     <EventSetter Event="Drop" Handler="ItemControlBoard_Drop" />
                     <EventSetter Event="DragOver" Handler="ItemControlBoard_DragOver" />
