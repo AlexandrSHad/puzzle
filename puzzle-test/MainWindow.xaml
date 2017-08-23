@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:puzzle_test"
         mc:Ignorable="d"
-        Title="MainWindow" Height="575" Width="825">
+        Title="Puzzle. Try it out!" Height="575" Width="825"
+        x:Name="Window"
+        Background="Bisque">
     <Window.Resources>
         <local:CurrentPositionConverter x:Key="currentPositionConverter" />
     </Window.Resources>
@@ -13,38 +15,60 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition Width="550" />
+            <ColumnDefinition Width="{Binding ActualHeight, ElementName=Window, Mode=OneWay}"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox ItemsSource="{Binding HeapViewModel.Tags}">
+        <!--<ListBox ItemsSource="{Binding HeapViewModel.Tags}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Image Source="{Binding ImagePath}" Height="170" Width="170"
                            PreviewMouseMove="ListBoxHeap_PreviewMouseMove" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
-        
-        <ItemsControl Name="itemsControl" Grid.Column="1" ItemsSource="{Binding BoardViewModel.Tags}">
+        </ListBox>-->
+
+        <WrapPanel Width="{Binding ActualHeight, ElementName=SomeRow, Mode=OneWay}"
+                   Background="Green">
+            <TextBlock Text="1" Background="Red" />
+            
+        </WrapPanel>
+
+        <!--<ItemsControl ItemsSource="{Binding HeapViewModel.Tags}" Margin="5">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Grid x:Name="gridBoard" ShowGridLines="True">
+                    <WrapPanel ItemHeight="30">
+                    </WrapPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:Tag}">
+                    <Image Source="{Binding ImagePath}"
+                           PreviewMouseMove="Heap_PreviewMouseMove" />
+                </DataTemplate>
+                --><!--Height="{Binding ActualHeight, ElementName=SomeRow, Mode=OneWay}"--><!--
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>-->
+
+        <ItemsControl Grid.Column="1" ItemsSource="{Binding BoardViewModel.Tags}" Margin="5">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid x:Name="gridBoard">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
+                            <ColumnDefinition x:Name="SomeColumn" />
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
+                            <RowDefinition Height="*" x:Name="SomeRow" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                     </Grid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:Tag}">
-                    <Image Source="{Binding ImagePath}" />
+                    <Image Source="{Binding ImagePath}" Stretch="Fill" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
@@ -58,9 +82,9 @@
                                     Converter={StaticResource currentPositionConverter},
                                     ConverterParameter=Column}" />
                     <Setter Property="AllowDrop" Value="True" />
-                    <EventSetter Event="Drop" Handler="ItemControlBoard_Drop" />
-                    <EventSetter Event="DragOver" Handler="ItemControlBoard_DragOver" />
-                    <EventSetter Event="PreviewMouseMove" Handler="ItemControlBoard_PreviewMouseMove" />
+                    <EventSetter Event="Drop" Handler="Board_Drop" />
+                    <EventSetter Event="DragOver" Handler="Board_DragOver" />
+                    <EventSetter Event="PreviewMouseMove" Handler="Board_PreviewMouseMove" />
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>

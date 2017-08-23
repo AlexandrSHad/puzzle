@@ -16,7 +16,7 @@ namespace puzzle_test
         }
 
         // TODO: create class for Drag and Drop command binding as Attached Behavior rather then this three methods
-        private void ItemControlBoard_PreviewMouseMove(object sender, MouseEventArgs e)
+        private void Board_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
@@ -36,13 +36,7 @@ namespace puzzle_test
             }
         }
 
-        private void buttonMove_Click(object sender, RoutedEventArgs e)
-        {
-            _mainViewModel.BoardViewModel.Tags[0].CurrentPosition = 8;
-            _mainViewModel.BoardViewModel.Tags[8].CurrentPosition = 0;
-        }
-
-        private void ItemControlBoard_Drop(object sender, DragEventArgs e)
+        private void Board_Drop(object sender, DragEventArgs e)
         {
             Tag targetTag = GetRelationTag(e.OriginalSource);
 
@@ -59,7 +53,7 @@ namespace puzzle_test
             }
         }
 
-        private void ItemControlBoard_DragOver(object sender, DragEventArgs e)
+        private void Board_DragOver(object sender, DragEventArgs e)
         {
             e.Effects = DragDropEffects.None;
 
@@ -73,7 +67,7 @@ namespace puzzle_test
             e.Handled = true;
         }
 
-        private void ListBoxHeap_PreviewMouseMove(object sender, MouseEventArgs e)
+        private void Heap_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
