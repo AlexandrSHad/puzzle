@@ -15,7 +15,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition Width="{Binding ActualHeight, ElementName=Window, Mode=OneWay}"/>
+            <ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}, Path=ActualHeight}" />
         </Grid.ColumnDefinitions>
 
         <!--<ListBox ItemsSource="{Binding HeapViewModel.Tags}">
@@ -30,7 +30,7 @@
         <WrapPanel Width="{Binding ActualHeight, ElementName=SomeRow, Mode=OneWay}"
                    Background="Green">
             <TextBlock Text="1" Background="Red" />
-            
+
         </WrapPanel>
 
         <!--<ItemsControl ItemsSource="{Binding HeapViewModel.Tags}" Margin="5">
@@ -68,7 +68,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:Tag}">
-                    <Image Source="{Binding ImagePath}" Stretch="Fill" />
+                    <Image Source="{Binding ImagePath}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemContainerStyle>
