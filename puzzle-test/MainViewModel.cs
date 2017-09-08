@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace puzzle_test
 {
@@ -19,6 +20,17 @@ namespace puzzle_test
             public HeapViewModel HeapViewModel
             {
                 get { return _heapViewModel; }
+            }
+
+        public void DoNewCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("New game!");
+        }
+
+        private RoutedCommand newCommand;
+            public RoutedCommand NewCommand
+            {
+                get { return newCommand ?? (newCommand = new RoutedCommand()); }
             }
 
         public void Move(Tag source, Tag target)
