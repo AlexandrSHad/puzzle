@@ -15,8 +15,18 @@
             <ColumnDefinition />
             <ColumnDefinition Width="550" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-        <ListBox ItemsSource="{Binding HeapViewModel.Tags}">
+        <ToolBar Grid.ColumnSpan="2">
+            <DockPanel>
+                <Button Content="New game" Command="{Binding NewGameCommand}" />
+            </DockPanel>
+        </ToolBar>
+
+        <ListBox Grid.Row="1" ItemsSource="{Binding HeapViewModel.Tags}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Image Source="{Binding ImagePath}" Height="170" Width="170"
@@ -25,7 +35,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         
-        <ItemsControl Name="itemsControl" Grid.Column="1" ItemsSource="{Binding BoardViewModel.Tags}">
+        <ItemsControl Name="itemsControl" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding BoardViewModel.Tags}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid x:Name="gridBoard" ShowGridLines="True">

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace puzzle_test
 {
@@ -35,6 +31,12 @@ namespace puzzle_test
             source.CurrentPosition = target.CurrentPosition;
             _tags.Remove(target);
             _tags.Add(source);
+        }
+
+        public void Reset()
+        {
+            _tags.Clear();
+            CreateTags();
         }
 
         public bool CheckForWin()

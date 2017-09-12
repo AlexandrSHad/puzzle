@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace puzzle_test
 {
@@ -53,5 +48,24 @@ namespace puzzle_test
                 MessageBox.Show("Congratulation! You are a winner.");
             }
         }
+
+        #region NewGameCommand
+
+        private RelayCommand _newGameCommand;
+        public RelayCommand NewGameCommand
+        {
+            get
+            {
+                return _newGameCommand ?? (_newGameCommand = new RelayCommand(NewGameCommand_Execute));
+            }
+        }
+
+        public void NewGameCommand_Execute(object parameter)
+        {
+            _boardViewModel.Reset();
+            _heapViewModel.Reset();
+        }
+
+        #endregion NewGameCommand
     }
 }
