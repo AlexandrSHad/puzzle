@@ -10,10 +10,6 @@
         <local:CurrentPositionConverter x:Key="currentPositionConverter" />
     </Window.Resources>
 
-    <Window.CommandBindings>
-        <CommandBinding Command="New" Executed="{Binding NewCommand}" />
-    </Window.CommandBindings>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -26,7 +22,7 @@
 
         <ToolBar Grid.ColumnSpan="2">
             <DockPanel>
-                <Button Content="New game" Command="New" />
+                <Button Content="New game" Command="{Binding NewGameCommand}" />
             </DockPanel>
         </ToolBar>
 

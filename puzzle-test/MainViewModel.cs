@@ -22,17 +22,6 @@ namespace puzzle_test
                 get { return _heapViewModel; }
             }
 
-        public void DoNewCommand(object sender, ExecutedRoutedEventArgs e)
-        {
-            MessageBox.Show("New game!");
-        }
-
-        private RoutedCommand newCommand;
-            public RoutedCommand NewCommand
-            {
-                get { return newCommand ?? (newCommand = new RoutedCommand()); }
-            }
-
         public void Move(Tag source, Tag target)
         {
             if (source.CurrentPosition == -1)
@@ -65,5 +54,23 @@ namespace puzzle_test
                 MessageBox.Show("Congratulation! You are a winner.");
             }
         }
+
+        #region NewGameCommand
+
+        private RelayCommand _newGameCommand;
+        public RelayCommand NewGameCommand
+        {
+            get
+            {
+                return _newGameCommand ?? (_newGameCommand = new RelayCommand(NewGameCommand_Execute));
+            }
+        }
+
+        public void NewGameCommand_Execute(object parameter)
+        {
+            MessageBox.Show("New game.");
+        }
+
+        #endregion NewGameCommand
     }
 }
