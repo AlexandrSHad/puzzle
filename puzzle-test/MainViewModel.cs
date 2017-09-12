@@ -68,7 +68,8 @@ namespace puzzle_test
 
         public void NewGameCommand_Execute(object parameter)
         {
-            MessageBox.Show("New game.");
+            _boardViewModel.Reset();
+            _heapViewModel.Reset();
         }
 
         #endregion NewGameCommand

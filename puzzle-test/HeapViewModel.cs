@@ -44,6 +44,12 @@ namespace puzzle_test
             _tags.Remove(source);
         }
 
+        public void Reset()
+        {
+            _tags.Clear();
+            CreateTags();
+            Shuffle();
+        }
 
         #region Helpers
 

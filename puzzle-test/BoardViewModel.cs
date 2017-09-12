@@ -37,6 +37,12 @@ namespace puzzle_test
             _tags.Add(source);
         }
 
+        public void Reset()
+        {
+            _tags.Clear();
+            CreateTags();
+        }
+
         public bool CheckForWin()
         {
             return _tags.All(t => t.CurrentPosition == t.RequiredPosition);
